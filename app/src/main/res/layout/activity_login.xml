@@ -69,6 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="로그인"
+        android:textSize="15sp"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/editText_pwd"
         app:layout_constraintStart_toStartOf="@+id/editText_pwd"
         app:layout_constraintTop_toBottomOf="@+id/editText_pwd" />
@@ -79,7 +81,7 @@
         android:layout_height="wrap_content"
         android:text="회원가입"
         android:textSize="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/button_login"
         app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
