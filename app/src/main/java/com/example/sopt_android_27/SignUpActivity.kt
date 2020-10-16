@@ -20,7 +20,7 @@ class SignUpActivity : AppCompatActivity() {
                 val id = edittext_id.text.toString()
                 val pwd = edittext_pwd.text.toString()
 
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("id", id)
                 intent.putExtra("pwd", pwd)
                 setResult(Activity.RESULT_OK, intent)
