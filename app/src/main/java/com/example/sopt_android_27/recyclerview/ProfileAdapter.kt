@@ -1,18 +1,20 @@
-package com.example.sopt_android_27
+package com.example.sopt_android_27.recyclerview
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt_android_27.DetailActivity
+import com.example.sopt_android_27.R
 
 class ProfileAdapter(private val context : Context) : RecyclerView.Adapter<ProfileViewHolder>() {
     var data = listOf<ProfileData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.sample_item_list,
+        val view = LayoutInflater.from(context).inflate(
+            R.layout.sample_item_list,
             parent, false)
 
         return ProfileViewHolder(view)

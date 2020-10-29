@@ -1,8 +1,9 @@
-package com.example.sopt_android_27
+package com.example.sopt_android_27.recyclerview
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt_android_27.R
 
 class ProfileViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     private val title : TextView = itemView.findViewById(R.id.item_title)
