@@ -1,8 +1,11 @@
 package com.example.sopt_android_27
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class ProfileAdapter(private val context : Context) : RecyclerView.Adapter<ProfileViewHolder>() {
@@ -20,5 +23,18 @@ class ProfileAdapter(private val context : Context) : RecyclerView.Adapter<Profi
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         holder.onBind(data[position])
+
+        //아이템 클릭 이벤트
+        holder.itemView.setOnClickListener {
+
+            val title = data[position].title
+            val subTitle = data[position].subTitle
+
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("title", title)
+            intent.putExtra("subTitle", subTitle)
+
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 }
