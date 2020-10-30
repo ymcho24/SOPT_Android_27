@@ -97,3 +97,78 @@ finish()
 
 <br><br>
 
+* * *
+
+### 📌 2주차
+(update 2020/10/30)
+<br><br>
+
+#### **📱 구현 화면**
+<br>
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/52772787/97652779-8f87d500-1aa2-11eb-830a-15ff52aff32e.gif)
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/52772787/97652803-a5959580-1aa2-11eb-9477-a12008d4cc79.gif)
+
+
+<br>
+
+#### **💻 필수 과제**
+ <br>
+ 
+ > ##### 리사이클러뷰 아이템 클릭 이벤트
+ 
+ ##### ProfileAdapter
+ 
+ ```kotlin
+holder.itemView.setOnClickListener {
+
+            val title = data[position].title
+            val subTitle = data[position].subTitle
+
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("title", title)
+            intent.putExtra("subTitle", subTitle)
+
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
+ ```
+ 
+ - itemView 객체를 이용해서 recyclerView의 item에 접근할 수 있습니다.
+ - holder의 itemView에 클릭 리스너를 추가하고, 각 item의 정보를 상세보기 화면으로 보내기 위해 intent에 담았습니다.
+ - startActivity를 통해 DetailActivity로 해당 intent를 보냈습니다.
+ 
+ <br>
+ 
+ ##### DetailActivity
+ 
+ ```kotlin
+        val title = intent.getStringExtra("title")
+        val subTitle = intent.getStringExtra("subTitle")
+
+        textView_title.text = title
+        textView_subTitle.text = subTitle
+ ```
+ 
+ - title과 subTitle 변수에 intent로 받아온 값을 할당했습니다.
+ - 상세보기 화면의 textView에 title과 subTitle 값을 설정했습니다.
+ 
+ <br>
+ 
+ #### **💻 성장 과제 1**
+ 
+ <br>
+ 
+ > ##### GridLayout 만들기
+ 
+ ##### GridFragment
+ 
+ ```kotlin
+       main_recycler_grid.adapter = gridAdapter
+       main_recycler_grid.layoutManager = GridLayoutManager(context!!, 3)
+ ```
+ 
+ - GridLayoutManager의 spanCount를 3으로 지정해줬습니다. spanCount = 3일 때, 3열의 layout이 생성됩니다.
+ 
+ <br>
+ 
+ 
