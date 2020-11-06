@@ -1,4 +1,4 @@
-package com.example.sopt_android_27
+package com.example.sopt_android_27.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sopt_android_27.R
 import com.example.sopt_android_27.recyclerview.GridAdapter
-import com.example.sopt_android_27.recyclerview.ProfileAdapter
 import com.example.sopt_android_27.recyclerview.ProfileData
 import kotlinx.android.synthetic.main.fragment_grid.*
-import kotlinx.android.synthetic.main.fragment_linear.*
 
 class GridFragment : Fragment() {
     private lateinit var gridAdapter : GridAdapter

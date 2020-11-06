@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_face"
+        android:title="Profile"/>
+    <item
+        android:id="@+id/menu_obeject"
+        android:icon="@drawable/ic_object"
+        android:title="Object"/>
+    <item
+        android:id="@+id/menu_pets"
+        android:icon="@drawable/ic_pets"
+        android:title="Pet"/>
+</menu>

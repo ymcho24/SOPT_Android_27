@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ProfileFragment">
+
+    <ImageView
+        android:id="@+id/imageView_profile"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/sunglassesdog"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강희원"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_profile"
+        app:layout_constraintStart_toStartOf="@+id/imageView_profile"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_profile" />
+
+    <TextView
+        android:id="@+id/textView_hi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안녕하세요 !"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView_name"
+        app:layout_constraintStart_toStartOf="@+id/textView_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+
+    <TextView
+        android:id="@+id/textView_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="27기 안드로이드 파트 강희원입니다."
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView_name"
+        app:layout_constraintStart_toStartOf="@+id/textView_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView_hi" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_sample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_introduce"
+        app:tabIndicatorColor="#5C5C5C"
+        app:tabSelectedTextColor="#5C5C5C">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_profile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_sample" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

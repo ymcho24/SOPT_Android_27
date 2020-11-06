@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sopt_android_27.DetailActivity
+import com.example.sopt_android_27.activity.DetailActivity
 import com.example.sopt_android_27.R
 
 class ProfileAdapter(private val context : Context) : RecyclerView.Adapter<ProfileViewHolder>() {
