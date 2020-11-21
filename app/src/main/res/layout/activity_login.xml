@@ -74,7 +74,7 @@
         android:textColor="#000000"
         android:textSize="15sp"
         android:padding="20dp"
-        android:background="#EAEAEA"
+        android:background="@drawable/login_btn"
         app:layout_constraintEnd_toEndOf="@+id/editText_pwd"
         app:layout_constraintStart_toStartOf="@+id/editText_pwd"
         app:layout_constraintTop_toBottomOf="@+id/editText_pwd" />
