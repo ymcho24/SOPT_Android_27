@@ -13,4 +13,11 @@ interface SoptService {
     fun postLogin(
         @Body body : RequestLoginData
     ) : Call<ResponseLoginData>
+
+    @Headers("Content-Type:application/json")
+    @POST("/users/signup")
+
+    fun postSignup(
+        @Body body : RequestSignupData
+    ) : Call<ResponseSignupData>
 }

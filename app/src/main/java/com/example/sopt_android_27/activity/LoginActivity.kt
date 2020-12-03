@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.sopt_android_27.R
 import com.example.sopt_android_27.network.RequestLoginData
@@ -32,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
             call.enqueue(object : Callback<ResponseLoginData> {
                 override fun onFailure(call: Call<ResponseLoginData>, t: Throwable) {
                     //통신 실패 로직
+                    Log.d("login fail", "통신실패")
                 }
 
                 override fun onResponse(
