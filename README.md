@@ -312,5 +312,175 @@ viewPagerAdapter = SampleViewPagerAdapter(childFragmentManager)
  - TabLayout에 viewPager를 연동해줍니다.
  - 반드시 연동 후에 ❕ 각 인덱스와 일치하는 탭 아이템 title을 작성해줍니다.
  
+ <br><br>
+  
+ * * *
+
+### 📌 6주차
+(update 2020/12/4)
+<br><br>
+
+#### **📱 회원가입 및 로그인 완료 화면**
+<br>
+ 
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/52772787/101120862-067c3480-3632-11eb-9bb0-cf3448069bd6.gif)
+
+<br>
+
+#### **📱 POSTMAN 테스트**
+<br>
+
+ > ##### 회원가입 성공 시 response
+ 
+ ![postman-signup](https://user-images.githubusercontent.com/52772787/101121367-54456c80-3633-11eb-9f77-5e1de4a55130.png)
+
+<br>
+
+ > ##### 로그인 성공 시 response
+ 
+![postman-signin](https://user-images.githubusercontent.com/52772787/101121382-60c9c500-3633-11eb-99fc-647e963d4c2d.png)
+ 
  <br>
+
+#### **💻 필수 과제**
+ <br>
+ 
+ > ##### retrofit interface
+ 
+ ##### SoptService
+ 
+ ```kotlin
+interface SoptService {
+    @Headers("Content-Type:application/json")
+    @POST("/users/signin")
+
+    //서버에 로그인 요청하는 함수
+    fun postLogin(
+        @Body body : RequestLoginData
+    ) : Call<ResponseLoginData>
+
+    @Headers("Content-Type:application/json")
+    @POST("/users/signup")
+
+    fun postSignup(
+        @Body body : RequestSignupData
+    ) : Call<ResponseSignupData>
+}
+ ```
+ 
+ - @Headers 어노테이션을 통해 요청 헤더를 설정해줍니다.
+ - @POST 어노테이션을 통해 POST 사용하는 메소드를 표시하고, 경로를 설정합니다.
+ - @Body 어노테이션을 통해 RequestBody를 설정해줍니다.
+ - 객체로 된 JSON 데이터를 받기 때문에, Call<ResponseSignupData>로 리턴 타입을 설정합니다.
+ 
+ <br>
+ 
+  > ##### retrofit interface 실제 구현체
+ 
+  ##### SoptServiceImpl
+ 
+ ```kotlin
+object SoptServiceImpl {
+    private const val BASE_URL = "http://15.164.83.210:3000"
+
+    private val retrofit : Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val service : SoptService = retrofit.create(
+        SoptService::class.java)
+}
+ ```
+ 
+ - 객체는 하나만 생성하고 프로젝트 어디서나 사용할 수 있게 하는 디자인 패턴 중 하나인 '싱글톤' 객체로 사용하기 위해 object로 선언해줍니다.
+ - 메인 서버 URL을 변수 BASE_URL에 넣어주고, Retrofit 객체를 생성합니다.
+ - 이전에 만든 interface 객체를 넘겨 service라는 실제 구현체를 생성합니다. 
+ 
+  <br>
+ 
+  > ##### Request 객체 생성
+ 
+  ##### RequestSignupData
+ 
+ ```kotlin
+data class RequestSignupData(
+    val email : String,
+    val password : String,
+    val userName : String
+)
+ ```
+ 
+ - 회원 가입 요청 바디에 맞게 data class를 작성했습니다.
+ 
+  <br>
+ 
+  > ##### Response 객체 생성
+ 
+  ##### ResponseSignupData
+ 
+ ```kotlin
+data class ResponseSignupData(
+    val email : String,
+    val userName : String,
+    val password : String
+)
+ ```
+ 
+ - 회원 가입 응답 바디에 맞게 data class를 작생했습니다.
+ - Json 객체의 키 값과 data class의 타입을 일치시켜줍니다.
+ 
+  <br>
+ 
+  > ##### Callback 등록 및 통신 요청
+ 
+  ##### SignUpActivity
+ 
+ ```kotlin
+//서버 통신
+            val call : Call<ResponseSignupData> = SoptServiceImpl.service.postSignup(
+                RequestSignupData(
+                    email = id,
+                    password = pwd,
+                    userName = name
+                )
+            )
+            call.enqueue(object : Callback<ResponseSignupData> {
+                override fun onFailure(call: Call<ResponseSignupData>, t: Throwable) {
+                    Log.d("signup fail", "통신실패")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseSignupData>,
+                    response: Response<ResponseSignupData>
+                ) {
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        ?.let {
+                            if (name.isNotEmpty() && id.isNotEmpty() && pwd.isNotEmpty()) {
+                                Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+
+                                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+                                intent.putExtra("id", id)
+                                intent.putExtra("pwd", pwd)
+                                setResult(Activity.RESULT_OK, intent)
+
+                                finish()
+                            }
+                            else {
+                                Toast.makeText(this@SignUpActivity, "빈 칸을 채워주세요", Toast.LENGTH_SHORT).show()
+                            }
+                        } ?: showError(response.errorBody())
+                }
+
+            })
+ ```
+ 
+ - 앞서 만든 싱글톤 객체를 이용하여, Call 객체를 받아옵니다.
+ - enqueue를 호출하여 실제 서버 통신을 비동기적으로 요청합니다.
+ - Callback 익명클래스를 선언하고, 통신 실패 시 실행되는 onFailure 메소드와 통신 성공 시 실행되는 onResponse 메소드를 불러옵니다.
+ - response.isSuccessful이 false이거나 body()에 값이 없을 경우 에러 처리를 해주기 위해 showError 메소드를 호출합니다.
+ - 사용자가 입력한 이메일·비밀번호·이름을 서버로 보내고, 통신 성공 시 가입 완료를 알리는 토스트 메시지가 뜨면서 LoginActivity로 화면이 전환되도록 구현했습니다.
+ 
+ <br><br>
  
